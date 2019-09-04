@@ -16,23 +16,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColor = activeCardColor;
-  Color femaleCardColor = inactiveCardColor;
-
-  void updateColor(Gender gender) {
-
-    if (gender == Gender.MALE) {
-      if (maleCardColor == inactiveCardColor) {
-        maleCardColor = activeCardColor;
-        femaleCardColor = inactiveCardColor;
-      }
-    } else if (gender == Gender.FEMALE) {
-      if (femaleCardColor == inactiveCardColor) {
-        femaleCardColor = activeCardColor;
-        maleCardColor = inactiveCardColor;
-      }
-    }
-  }
+  Gender selectedGender = Gender.MALE;
 
   final row2 = Container(
     child: Row(
@@ -65,12 +49,11 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        print("tap1");
-                        updateColor(Gender.MALE);
+                        selectedGender = Gender.MALE;
                       });
                     },
                     child: ReusableCard(
-                      color: maleCardColor,
+                      color: selectedGender==Gender.MALE?activeCardColor:inactiveCardColor,
                       cardChild: IconContent(
                         iconData: FontAwesomeIcons.mars,
                         title: "MALE",
@@ -82,12 +65,11 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        print("tap2");
-                        updateColor(Gender.FEMALE);
+                        selectedGender = Gender.FEMALE;
                       });
                     },
                     child: ReusableCard(
-                      color: femaleCardColor,
+                      color: selectedGender==Gender.FEMALE?activeCardColor:inactiveCardColor,
                       cardChild: IconContent(
                           iconData: FontAwesomeIcons.venus, title: "FEMALE"),
                     ),
