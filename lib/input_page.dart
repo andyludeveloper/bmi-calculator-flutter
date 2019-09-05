@@ -46,33 +46,21 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedGender = Gender.MALE;
-                      });
-                    },
-                    child: ReusableCard(
-                      color: selectedGender==Gender.MALE?activeCardColor:inactiveCardColor,
-                      cardChild: IconContent(
-                        iconData: FontAwesomeIcons.mars,
-                        title: "MALE",
-                      ),
+                  child: ReusableCard(
+                    color: selectedGender==Gender.MALE?activeCardColor:inactiveCardColor,
+                    cardChild: IconContent(
+                      iconData: FontAwesomeIcons.mars,
+                      title: "MALE",
                     ),
+                    itemSelected: maleSelected,
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedGender = Gender.FEMALE;
-                      });
-                    },
-                    child: ReusableCard(
-                      color: selectedGender==Gender.FEMALE?activeCardColor:inactiveCardColor,
-                      cardChild: IconContent(
-                          iconData: FontAwesomeIcons.venus, title: "FEMALE"),
-                    ),
+                  child: ReusableCard(
+                    color: selectedGender==Gender.FEMALE?activeCardColor:inactiveCardColor,
+                    cardChild: IconContent(
+                        iconData: FontAwesomeIcons.venus, title: "FEMALE"),
+                    itemSelected: femaleSelected,
                   ),
                 ),
               ],
@@ -103,5 +91,19 @@ class _InputPageState extends State<InputPage> {
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  void maleSelected(){
+    genderSelected(Gender.MALE);
+  }
+
+  void femaleSelected(){
+    genderSelected(Gender.FEMALE);
+  }
+
+  void genderSelected(Gender gender){
+    setState(() {
+      selectedGender = gender;
+    });
   }
 }
