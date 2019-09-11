@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reusable_card.dart';
+import 'round_icon_button.dart';
 import 'constants.dart';
 
 enum Gender { MALE, FEMALE }
@@ -14,19 +15,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectedGender = Gender.MALE;
   int height = 150;
-  final row3 = Container(
-    child: Row(
-      children: <Widget>[
-        Expanded(
-          child: ReusableCard(color: kActiveCardColor),
-        ),
-        Expanded(
-          child: ReusableCard(color: kActiveCardColor),
-        ),
-      ],
-    ),
-  );
-
+  int weight = 80;
+  int age = 20;
   @override
   Widget build(BuildContext context) {
     var row1 = Expanded(
@@ -72,35 +62,125 @@ class _InputPageState extends State<InputPage> {
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
             children: <Widget>[
-            Text(
-              height.toString(),
-              style:kLargeLabelTextStyle,
-            ),
-            Text(
-              'cm',
-              style:kLabelTextStyle,
-            ),
-          ],
+              Text(
+                height.toString(),
+                style: kLargeLabelTextStyle,
+              ),
+              Text(
+                'cm',
+                style: kLabelTextStyle,
+              ),
+            ],
           ),
           SliderTheme(
             data: SliderTheme.of(context).copyWith(
-              activeTrackColor: Colors.white,
-              inactiveTrackColor: Color(0xFF8D8E98),
-              thumbColor: Color(0xFFEB1555),
-              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15.0,),
-              overlayColor: Color(0x29EB1555),
-              overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0,)
-            ),
+                activeTrackColor: Colors.white,
+                inactiveTrackColor: Color(0xFF8D8E98),
+                thumbColor: Color(0xFFEB1555),
+                thumbShape: RoundSliderThumbShape(
+                  enabledThumbRadius: 15.0,
+                ),
+                overlayColor: Color(0x29EB1555),
+                overlayShape: RoundSliderOverlayShape(
+                  overlayRadius: 30.0,
+                )),
             child: Slider(
               value: height.toDouble(),
               min: 120.0,
               max: 220.0,
-              onChanged:(double newValue){
+              onChanged: (double newValue) {
                 setState(() {
                   print(newValue);
                   height = newValue.round();
                 });
               },
+            ),
+          )
+        ],
+      ),
+    );
+
+    var row3 = Container(
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: ReusableCard(
+              color: kActiveCardColor,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'WEIGHT',
+                    style: kLabelTextStyle,
+                  ),
+                  Text(
+                    weight.toString(),
+                    style: kLargeLabelTextStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      RoundIconButton(
+                        icon: FontAwesomeIcons.minus,
+                        pressedCallback: () {
+                          setState(() {
+                            weight--;
+                          });
+                        },
+                      ),
+                      SizedBox(width: 5.0),
+                      RoundIconButton(
+                        icon: FontAwesomeIcons.plus,
+                        pressedCallback: () {
+                          setState(() {
+                            weight++;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: ReusableCard(
+              color: kActiveCardColor,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'AGE',
+                    style: kLabelTextStyle,
+                  ),
+                  Text(
+                    age.toString(),
+                    style: kLargeLabelTextStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      RoundIconButton(
+                        icon: FontAwesomeIcons.minus,
+                        pressedCallback: () {
+                          setState(() {
+                            age--;
+                          });
+                        },
+                      ),
+                      SizedBox(width: 5.0),
+                      RoundIconButton(
+                        icon: FontAwesomeIcons.plus,
+                        pressedCallback: () {
+                          setState(() {
+                            age++;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           )
         ],
@@ -129,9 +209,6 @@ class _InputPageState extends State<InputPage> {
           )
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-      ),
     );
   }
 
@@ -149,3 +226,5 @@ class _InputPageState extends State<InputPage> {
     });
   }
 }
+
+
