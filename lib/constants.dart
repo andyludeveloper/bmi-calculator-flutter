@@ -10,7 +10,18 @@ const kLabelTextStyle = TextStyle(
   color: Color(0xFF8D8E98),
 );
 
+const kGreenLabelTextStyle = TextStyle(
+  fontSize: 18.0,
+  color: Colors.green,
+  fontWeight: FontWeight.bold
+);
+
 const kLargeLabelTextStyle = TextStyle(
   fontSize: 50.0,
+  fontWeight: FontWeight.w900,
+);
+
+const kLargeButtonTextStyle = TextStyle(
+  fontSize: 25.0,
   fontWeight: FontWeight.w900,
 );
